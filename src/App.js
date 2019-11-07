@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux'; // Deixa disponivel o store da aplicacao para todos os componentes, jogar por volta de todos os componentes da aplicacao
+import GlobalStyle from './styles/global';
+import Header from './components/Header';
+import Routes from './routes';
+
+import store from './store';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    /** BrowserRouter foi chamado aqui, porque futuramente o header vai
+      precisar ter acesso as rotas tambem */
+    <Provider store={store}>
+      {/** passar o store criado na pasta store como parametro para provider */}
+      <BrowserRouter>
+        <Header />
+        <Routes />
+        <GlobalStyle />
+      </BrowserRouter>
+    </Provider>
   );
 }
 
